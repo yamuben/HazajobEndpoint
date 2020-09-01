@@ -19,7 +19,8 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "mongoose": "^5.10.1"
+    "mongoose": "^5.10.1",
+    "validator": "^13.1.1"
   },
   "browserslist": {
     "production": [
@@ -53,5 +54,8 @@
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.20.6",
     "prettier": "^2.1.1"
+  },
+  "engines": {
+    "node": "^12"
   }
 }
