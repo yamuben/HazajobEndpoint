@@ -1,8 +1,8 @@
 import JobApplication from '../models/jobAppModel';
 import AppError from '../utils/appError';
-import catchAsync from '../utils/catchAsyncErr';
+import catchAsyncErr from '../utils/catchAsyncErr';
 
-export const createJopApp = catchAsync(async (req, res, next) => {
+export const createJopApp = catchAsyncErr(async (req, res, next) => {
   const jobApp = await JobApplication.create(req.body);
   res.status(201).json({
     status: 'sucess',
@@ -12,7 +12,7 @@ export const createJopApp = catchAsync(async (req, res, next) => {
   });
 });
 
-export const getAllJobApps = catchAsync(async (req, res, next) => {
+export const getAllJobApps = catchAsyncErr(async (req, res, next) => {
   const jobApps = await JobApplication.find();
   res.status(200).json({
     status: 'success',
@@ -22,7 +22,7 @@ export const getAllJobApps = catchAsync(async (req, res, next) => {
     },
   });
 });
-export const getJobApp = catchAsync(async (req, res, next) => {
+export const getJobApp = catchAsyncErr(async (req, res, next) => {
   const jobApp = await JobApplication.findById(req.params.id);
   if (!jobApp) return next(new AppError(404, 'No doc found with that ID.'));
   res.status(200).json({
@@ -32,7 +32,7 @@ export const getJobApp = catchAsync(async (req, res, next) => {
     },
   });
 });
-export const updateJobApp = catchAsync(async (req, res, next) => {
+export const updateJobApp = catchAsyncErr(async (req, res, next) => {
   const jobApp = await JobApplication.findByIdAndUpdate(
     req.params.id,
     req.body,
@@ -46,7 +46,7 @@ export const updateJobApp = catchAsync(async (req, res, next) => {
     },
   });
 });
-export const deleteJobApp = catchAsync(async (req, res, next) => {
+export const deleteJobApp = catchAsyncErr(async (req, res, next) => {
   const jobApp = await JobApplication.findByIdAndDelete(req.params.id);
   if (!jobApp) return next(new AppError(404, 'No doc found with that ID.'));
   res.status(204).json({

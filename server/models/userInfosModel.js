@@ -47,6 +47,13 @@ const userInfosSchema = new mongoose.Schema(
       type: Date,
       default: Date.now(),
     },
+    title: {
+      type: String,
+      required: [
+        true,
+        'Please provide your job title, It might be helpful to get a job.',
+      ],
+    },
   },
   {
     toJSON: { virtuals: true },
