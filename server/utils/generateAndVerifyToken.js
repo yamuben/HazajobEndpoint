@@ -1,3 +1,4 @@
+import { promisify } from 'util';
 import jwt from 'jsonwebtoken';
 
 export const generateToken = (payload) => {
@@ -8,8 +9,8 @@ export const generateToken = (payload) => {
   return token;
 };
 
-export const VerifyToken = (token) => {
-  const data = jwt.verify(token, process.env.JWT_SECRET);
+export const verifyToken = async (token) => {
+  const data = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
 
   return data;
 };
