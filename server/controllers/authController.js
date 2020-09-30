@@ -38,6 +38,7 @@ export const login = catchAsyncErr(async (req, res, next) => {
     return next(new AppError(403, 'Invalid Email or Password!'));
 
   const token = generateToken({ email: user.email, id: user._id });
+  const tokenData = verifyToken(token);
   user.password = undefined;
   res.status(200).json({
     status: 'success',
@@ -45,6 +46,7 @@ export const login = catchAsyncErr(async (req, res, next) => {
     data: {
       user,
     },
+    dataToken:{tokenData,},
   });
 });
 
