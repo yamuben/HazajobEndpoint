@@ -36,8 +36,8 @@ export const getUserInfos = catchAsyncErr(async (req, res, next) => {
 });
 
 export const updateUserInfos = catchAsyncErr(async (req, res, next) => {
-  const updatedUser = await UserInfos.findByIdAndUpdate(
-    req.params.id,
+  const updatedUser = await UserInfos.findOneAndUpdate(
+    { loginInfos: req.user.id },
     req.body,
     {
       new: true,
@@ -56,7 +56,7 @@ export const updateUserInfos = catchAsyncErr(async (req, res, next) => {
 });
 
 export const deleteUserInfos = catchAsyncErr(async (req, res, next) => {
-  const user = await UserInfos.findByIdAndDelete(req.params.id);
+  const user = await UserInfos.findOneAndDelete({ loginInfos: req.user.id });
   if (!user) return next(new AppError(404, 'No user found with that ID!'));
 
   res.status(204).json({
