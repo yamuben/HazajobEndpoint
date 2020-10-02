@@ -25,7 +25,7 @@ export const getAllUserInfos = catchAsyncErr(async (req, res, next) => {
 });
 
 export const getUserInfos = catchAsyncErr(async (req, res, next) => {
-  const user = await UserInfos.findById(req.params.id);
+  const user = await UserInfos.findOne(req.params.id);
   if (!user) return next(new AppError(404, 'No User found with that ID!'));
   res.status(200).json({
     status: 'success',
