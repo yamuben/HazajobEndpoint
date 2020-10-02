@@ -3,6 +3,7 @@ import AppError from '../utils/appError';
 import catchAsyncErr from '../utils/catchAsyncErr';
 
 export const createUser = catchAsyncErr(async (req, res, next) => {
+  req.body.loginInfos = req.user.id;
   const user = await UserInfos.create(req.body);
   res.status(201).json({
     status: 'success',
@@ -47,7 +48,7 @@ export const updateUserInfos = catchAsyncErr(async (req, res, next) => {
   if (!updatedUser)
     return next(new AppError(404, 'No user found with that ID!'));
   res.status(200).json({
-    stastus: 'success',
+    status: 'success',
     data: {
       updatedUser,
     },

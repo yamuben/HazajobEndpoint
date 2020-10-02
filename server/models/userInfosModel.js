@@ -8,12 +8,10 @@ const userInfosSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Please provide yoour phone number'],
     },
-    loginInfoS: [
-      {
-        type: mongoose.Schema.ObjectId,
-        ref: 'AllUsers',
-      },
-    ],
+    loginInfos: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'AllUsers',
+    },
     motor: String,
     gender: String,
     idNo_Passport: {
@@ -60,6 +58,13 @@ const userInfosSchema = new mongoose.Schema(
     toObject: { virtuals: true },
   }
 );
+
+userInfosSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: 'loginInfos',
+  });
+  next();
+});
 
 const UserInfos = mongoose.model('UserInfos', userInfosSchema);
 

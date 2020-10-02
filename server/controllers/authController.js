@@ -15,10 +15,13 @@ export const signUp = catchAsyncErr(async (req, res, next) => {
     email: newUser.email,
     id: newUser._id,
   });
-
+  const willExpireOn = await verifyToken(token);
   res.status(201).json({
     status: 'success',
-    token,
+    auth: {
+      token,
+      willExpireOn: willExpireOn.exp,
+    },
     data: {
       newUser,
     },
@@ -38,15 +41,18 @@ export const login = catchAsyncErr(async (req, res, next) => {
     return next(new AppError(403, 'Invalid Email or Password!'));
 
   const token = generateToken({ email: user.email, id: user._id });
-  const tokenData = verifyToken(token);
+
+  const willExpireOn = await verifyToken(token);
   user.password = undefined;
   res.status(200).json({
     status: 'success',
-    token,
+    auth: {
+      token,
+      willExpireOn: willExpireOn.exp,
+    },
     data: {
       user,
     },
-    dataToken:{tokenData,},
   });
 });
 
