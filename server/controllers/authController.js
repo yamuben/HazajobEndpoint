@@ -35,7 +35,10 @@ export const login = catchAsyncErr(async (req, res, next) => {
 
   const user = await AllUsers.findOne({ email }).select('+password');
 
-  if (!user) return next(new AppError(400, 'Please signup first!'));
+  if (!user)
+    return next(
+      new AppError(400, "You don't have account! Please make account first")
+    );
 
   if (!(await user.isCorrectPassword(password, user.password)))
     return next(new AppError(403, 'Invalid Email or Password!'));
