@@ -1,10 +1,12 @@
 import UserInfos from '../models/userInfosModel';
+import AllUsers from '../models/allUsersModel';
 import AppError from '../utils/appError';
 import catchAsyncErr from '../utils/catchAsyncErr';
 
 export const createUser = catchAsyncErr(async (req, res, next) => {
   req.body.loginInfos = req.user.id;
   const user = await UserInfos.create(req.body);
+  await AllUsers.findByIdAndUpdate(req.user.id, { detailedInfos: user.id });
   res.status(201).json({
     status: 'success',
     data: {

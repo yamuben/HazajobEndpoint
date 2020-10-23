@@ -17,6 +17,10 @@ const allUsersSchema = new mongoose.Schema({
     minlength: [8, 'Password must contain atleast 8 characters'],
     select: false,
   },
+  detailedInfos: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'UserInfos',
+  },
   role: {
     type: String,
     enum: ['admin', 'client', 'superAdmin'],
