@@ -1,8 +1,11 @@
 import JobInfos from '../models/jobInfosModel';
 import AppError from '../utils/appError';
+import AllUsers from '../models/allUsersModel';
 import catchAsyncErr from '../utils/catchAsyncErr';
 
 export const createJobInfos = catchAsyncErr(async (req, res, next) => {
+  const owner = await AllUsers.findById(req.user.id);
+  req.body.jobPostedBy = owner.detailedInfos;
   const newJobInfos = await JobInfos.create(req.body);
   res.status(201).json({
     status: 'success',

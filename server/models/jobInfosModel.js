@@ -2,12 +2,11 @@ import mongoose from 'mongoose';
 
 const jobInfosSchema = new mongoose.Schema(
   {
-    jobPosetdBy: {
+    jobPostedBy: {
       type: mongoose.Schema.ObjectId,
       ref: 'UserInfos',
     },
     jobTitle: String,
-    jobOwner: String,
     jobPositionAvailable: String,
     jobPostTime: {
       jobPostedOn: {
@@ -29,7 +28,7 @@ const jobInfosSchema = new mongoose.Schema(
         ref: 'JobType',
       },
     ],
-    jobSalary: Number,
+    jobSalary: String,
     jobDays: String,
     jobLocation: {
       country: String,
@@ -59,6 +58,14 @@ const jobInfosSchema = new mongoose.Schema(
     toObject: { virtuals: true },
   }
 );
+
+jobInfosSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: 'jobPostedBy',
+    select: 'firstName lastName',
+  });
+  next();
+});
 
 const JobInfos = mongoose.model('JobInfos', jobInfosSchema);
 

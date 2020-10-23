@@ -62,6 +62,7 @@ const userInfosSchema = new mongoose.Schema(
 userInfosSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'loginInfos',
+    select: 'role email',
   });
   next();
 });
