@@ -29,8 +29,7 @@ export const createUser = catchAsyncErr(async (req, res, next) => {
 export const getAllUserInfos = catchAsyncErr(async (req, res, next) => {
   const users = await UserInfos.find();
   res.status(200).json({
-   name:users.firstName,
-    phone:users.phone
+   users
   });
 });
 
