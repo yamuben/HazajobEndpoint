@@ -15,14 +15,22 @@ export const createUser = catchAsyncErr(async (req, res, next) => {
   });
 });
 
+// export const getAllUserInfos = catchAsyncErr(async (req, res, next) => {
+//   const users = await UserInfos.find();
+//   res.status(200).json({
+//     status: 'success',
+//     results: users.length,
+//     data: {
+//       users,
+//     },
+//   });
+// });
+
 export const getAllUserInfos = catchAsyncErr(async (req, res, next) => {
   const users = await UserInfos.find();
   res.status(200).json({
-    status: 'success',
-    results: users.length,
-    data: {
-      users,
-    },
+   name:users.firstName,
+    phone:users.phone
   });
 });
 
