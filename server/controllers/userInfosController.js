@@ -26,6 +26,7 @@ export const getAllUserInfos = catchAsyncErr(async (req, res, next) => {
   });
 });
 
+
 export const getUserInfos = catchAsyncErr(async (req, res, next) => {
   const user = await UserInfos.findOne({ loginInfos: req.user.id });
   if (!user) return next(new AppError(404, 'No User found with that ID!'));
