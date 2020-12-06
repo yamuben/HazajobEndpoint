@@ -4,6 +4,7 @@ import * as austinController from '../controllers/austinController';
 const router = express.Router();
 
 router.post('/new',austinController.createFood);
+router.get('/all',austinController.getAllFoods);
 
 router
 .route('/:id')
