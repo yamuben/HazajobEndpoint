@@ -39,7 +39,7 @@ export const updateFood = catchAsyncErr(async (req, res, next) => {
 
 
   
-export const getFoods = catchAsyncErr(async (req, res, next) => {
+  export const getFoods = catchAsyncErr(async (req, res, next) => {
     const Foods = await nkubaData.findById(req.params.id);
     if (!Foods) return next(new AppError(404, 'No doc found with that ID.'));
     res.status(200).json({
@@ -49,3 +49,14 @@ export const getFoods = catchAsyncErr(async (req, res, next) => {
       },
     });
   });
+  
+  export const getAllFoods = catchAsyncErr(async (req, res, next) => {
+      const Foods = await nkubaData.find();
+      if (!Foods) return next(new AppError(404, 'No doc found with that ID.'));
+      res.status(200).json({
+        status: 'success',
+        data: {
+          Foods,
+        },
+      });
+    });
