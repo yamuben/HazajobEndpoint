@@ -37,7 +37,7 @@ export const login = catchAsyncErr(async (req, res, next) => {
 
   if (!user)
     return next(
-      new AppError(400, "You don't have account! Please make account first")
+      new AppError(400, "You don't have account! Please create account firstly")
     );
 
   if (!(await user.isCorrectPassword(password, user.password)))
