@@ -60,7 +60,8 @@ export const login = catchAsyncErr(async (req, res, next) => {
 });
 
 export const protect = catchAsyncErr(async (req, res, next) => {
-  const token = req.header('x_auth_token');
+  // const token = req.header('x_auth_token');
+  const token = req.body.token;
   if (!token)
     return next(new AppError(401, 'No token provided, Please provide token!'));
 
