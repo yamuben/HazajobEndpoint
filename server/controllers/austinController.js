@@ -15,13 +15,7 @@ export const createFood = catchAsyncErr(async (req,res,next)=>{
 
 export const deleteFood = catchAsyncErr(async (req,res,next)=>{
     console.log("************"+req.params.id);
-    const Foods = await nkubaData.findByIdAndDelete(req.params.id,function (err, docs) { 
-    if (err){ 
-        console.log(err) 
-    } 
-    else{ 
-        console.log("Deleted : ", docs); 
-    } );
+    const Foods = await nkubaData.remove({_id:ObjectId(req.params.id)});
     if (!Foods) return next(new AppError(404, 'No food found with that ID.'));
     res.status(204).json({
       status: 'success',
