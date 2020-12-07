@@ -1,5 +1,6 @@
 import nkubaData from '../models/austinModel';
 import catchAsyncErr from '../utils/catchAsyncErr';
+import AppError from "../utils/appError";
 
 export const createFood = catchAsyncErr(async (req,res,next)=>{
     
