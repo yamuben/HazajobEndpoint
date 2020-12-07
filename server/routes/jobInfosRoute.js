@@ -4,7 +4,7 @@ import * as authController from '../controllers/authController';
 
 const router = express.Router();
 router.use(authController.protect);
-router.post("/jobs", jobInfosController.getAllJobInfos);
+// router.post("/jobs", jobInfosController.getAllJobInfos);
 router
   .route('/')
   .get(jobInfosController.getAllJobInfos)
