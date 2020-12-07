@@ -61,6 +61,8 @@ export const login = catchAsyncErr(async (req, res, next) => {
 
 export const protect = catchAsyncErr(async (req, res, next) => {
   const token = req.header('Authorization');
+  console.log('💥💥💥 Token.....');
+  console.log(token);
 
   if (!token)
     return next(new AppError(401, 'No token provided, Please provide token!'));
