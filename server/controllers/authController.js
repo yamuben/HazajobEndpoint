@@ -61,7 +61,7 @@ export const login = catchAsyncErr(async (req, res, next) => {
 
 export const protect = catchAsyncErr(async (req, res, next) => {
   // const token = req.header('Authorization');
-  const { token } = req.body.token;
+  const { token } = req.body;
   // console.log('💥💥💥 Token.....');
   // console.log(req.header);
 
